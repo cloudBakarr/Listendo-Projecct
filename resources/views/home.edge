@@ -1,0 +1,174 @@
+@layout('layouts/layout')
+
+@section('body')
+  @include('layouts/header')
+  <div class="container">
+    <div class="text-center" style="padding: 100px 0">
+      <h1>Tell More About Your Project</h1>
+      <p class="mb-5">It's a tag line, where you can write a key point of your idea.</p>
+      <h3 class="mb-4">Create your best record!</h3>
+      <p>
+        Our Recording Studio is your one-stop spot for all of your professional recording needs. We offer an individual working environment that allows artists and bands to focus on their creative and artistic processes. Our recording and monitoring rooms are designed to achieve the most precise possible acoustic properties and sound. Studio features a considerable collection of cutting-edge and vintage equipment.
+      </p>
+    </div>
+  </div>
+  <div class="bg-image bg-fixed" style="background-image: url('/assets/images/calltoaction.jpg')">
+    <div class="container">
+      <div class="text-center" style="padding: 100px 0;">
+        <h1 class="mb-4 text-dark">Tell your visitors about time limited offer with 50% OFF.
+          It will raise the conversion!</h1>
+          @if(!auth.user)
+          <a href="{{ route('LoginController.showRegister') }}" class="btn btn-lg btn-outline-dark">Get Started</a>
+          @endif
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="text-center" style="padding: 100px 0;">
+      <h1 class="mb-4">Your Main Features & Benefits!</h1>
+      <p>We are sure that your product, service or event has plenty of advantages. Tell about them.</p>
+      <div class="row mt-5">
+        <div class="col-lg-4 col-md-6 text-center">
+          <h1><i class="fa fa-music"></i></h1>
+          <h4>
+            Lorem ipsum dolor sit.
+          </h4>
+          <p>
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Error, perspiciatis sit autem reiciendis sint,
+          </p>
+        </div>
+        <div class="col-lg-4 col-md-6 text-center">
+          <h1><i class="fa fa-compact-disc"></i></h1>
+          <h4>
+            Lorem ipsum dolor sit.
+          </h4>
+          <p>
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Error, perspiciatis sit autem reiciendis sint,
+          </p>
+        </div>
+        <div class="col-lg-4 col-md-6 text-center">
+          <h1><i class="fa fa-headphones"></i></h1>
+          <h4>
+            Lorem ipsum dolor sit.
+          </h4>
+          <p>
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Error, perspiciatis sit autem reiciendis sint,
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="bg-dark text-white">
+    <div class="container">
+      <div style="padding: 100px 0;">
+        <div class="text-center">
+          <h1>Tell About Your Featured Product</h1>
+          <p>Your visitors shoul know about your best product.</p>
+        </div>
+        <hr class="mb-4">
+        <div class="row" id="landing-page-row">
+          @each((m, i) in media)
+          <div class="col-md-6 col-lg-4 mb-3">
+            <div class="card">
+              <div class="card-body">
+                <div class="d-flex flex-row justify-content-between">
+                  <h5>{{ m.name }}</h5>
+                  <div class="d-flex align-items-center flex-column">
+                    <div class="profileImage" style="background-image: url('{{ m.image }}')"></div>
+                    <small class="text-secondary">{{ m.last_name }}</small>
+                  </div>
+                </div>
+                <p class="text-secondary">
+                  <small>Singer: {{ m.singer }}</small>
+                  <br>
+                  <small>{{ (new Date(m.created_at)).toDateString() }}</small>
+                </p>
+                <video controls class="video-control">
+                  <source src="{{ m.link }}">
+                  Your browser does not support this video
+                </video>
+              </div>
+            </div>
+          </div>
+          @endeach
+        </div>
+        <hr class="mt-5 mb-5">
+
+        <div class="text-center">
+          <div class="btn-group">
+            @each(anchor in media.getUrlsForRange(1, media.lastPage))
+              <a href="{{ anchor.url }}" onclick="landingPagePaginate(event)" class="btn btn-outline-secondary">
+                {{ anchor.page }}
+              </a>
+            @endeach
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-image" style="padding: 100px 0; background-image: url('/assets/images/contact-bg.jpg')">
+    <div class="container text-center">
+      <h1>Put Your Contacts Here</h1>
+      <p>Don't miss a chance to talk with your visitors, buyers, clients</p>
+      <div style="max-width: 600px; margin: 0 auto">
+        <form action="#" method="post">
+          <div class="input-group mb-3">
+            <div class="input-group-text">
+              * Name
+            </div>
+            <input type="text" name="name" id="name" class="form-control">
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-text">
+              * Email
+            </div>
+            <input type="text" name="name" id="name" class="form-control">
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-text">
+              * Message
+            </div>
+            <textarea name="message" id="message" rows="10" class="form-control"></textarea>
+          </div>
+          <button class="btn btn-primary" type="button">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div style="padding: 50px 0" class="bg-dark">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-md-4 col-lg-3">
+          <img class="me-3" style="width: 40px" src="/assets/images/logo.png" alt="logo"> <b>{{ appName }}</b> <br>
+          {{--  <p class="mt-4">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, neque doloremque dolorem commodi debitis maiores.
+          </p>  --}}
+        </div>
+        <div class="col-md-4 col-lg-3">
+          <p><b>Links</b></p>
+          <p>
+            <a href="/">Home</a>
+            <a href="{{ route('LoginController.showLogin') }}">Login</a>
+            <a href="{{ route('LoginController.showRegister') }}">Signup</a>
+          </p>
+        </div>
+        <div class="col-md-4 col-lg-3">
+          <p><b>Social</b></p>
+          <p>
+            <a href="#" class="me-2 btn btn-outline-secondary rounded-pill"><i class="fa-fw fab fa-facebook"></i></a>
+            <a href="#" class="me-2 btn btn-outline-secondary rounded-pill"><i class="fa-fw fab fa-twitter"></i></a>
+            <a href="#" class="me-2 btn btn-outline-secondary rounded-pill"><i class="fa-fw fab fa-youtube"></i></a>
+            <a href="#" class="me-2 btn btn-outline-secondary rounded-pill"><i class="fa-fw fab fa-google-plus-g"></i></a>
+          </p>
+        </div>
+        <div class="col-md-4 col-lg-3">
+          <p class="text-secondary">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia eveniet culpa est aliquid neque ipsum.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+@end

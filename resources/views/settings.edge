@@ -1,0 +1,88 @@
+@layout('layouts/layout')
+
+@section('body')
+  <div class="container" style="max-width: 500px">
+
+    @include('layouts/messages')
+
+    <div class="mb-5">
+      <h1>Profile Settings</h1>
+      <p>
+        Here you can change or edit your infomation and password!
+      </p>
+    </div>
+    <div class="mb-4" id="infoChangeDev">
+      <div id="curtain" style="display: none">
+        <h1 class="mb-3"><i class="fa fa-spinner fa-spin"></i></h1>
+        <p>Loading ...</p>
+        <p class="text-danger"><small>Don't close or switch the window!</small></p>
+      </div>
+      <h3>User information</h3>
+      <hr>
+      <form id="changeInfoForm" action="{{ route('DashboardController.changeInfo') }}" method="post" enctype="multipart/form-data">
+        <div class="input-group mb-3">
+          <div class="input-group-text">First name</div>
+          <input
+            value="{{ flashMessages.get('firstName', '') || user.firstName }}"  
+            type="firstName" name="firstName" id="firstName" class="form-control" autocomplete="firstName">
+        </div>
+        <div class="input-group mb-3">
+          <div class="input-group-text">Last name</div>
+          <input
+            value="{{ flashMessages.get('lastName', '') || user.lastName }}"  
+            type="lastName" name="lastName" id="lastName" class="form-control" autocomplete="lastName">
+        </div>
+        <div class="mb-3">
+          <input type="hidden" value="{{ user.image }}" id="firstUserImage">
+          <input
+            style="display: none"
+            type="file"
+            name="image"
+            id="profileImageInput"
+            class="form-control"
+            autocomplete="image"
+            accept="image/*"
+          />
+          <label id="profileImageShow" for="profileImageInput">
+            <div id="profileImageShowInner">
+              <i class="fa fa-user"></i>
+              <small>Change photo</small>
+            </div>
+          </label>
+        </div>
+        <div class="d-flex flex-row justify-content-end">
+          <button type="submit" class="btn btn-primary">
+            Submit
+            <i class="fa fa-circle-arrow-right ms-2"></i>
+          </button>
+        </div>
+      </form>
+    </div>
+    <div class="mb-4">
+      <h3>Change password</h3>
+      <hr>
+      <form action="{{ route('DashboardController.changePassword') }}" method="post">
+        <div class="input-group mb-3">
+          <div class="input-group-text">Current password</div>
+          <input type="password" name="oldPassword" id="oldPassword" class="form-control" autocomplete="current-oldPassword">
+          <button
+            showPass="oldPassword"
+            type="button" class="btn btn-primary"><i class="fa fa-eye"></i></button>
+        </div>
+        <div class="input-group mb-3">
+          <div class="input-group-text">New password</div>
+          <input type="password" name="newPassword" id="newPassword" class="form-control" autocomplete="current-newPassword">
+          <button
+            showPass="newPassword"
+            type="button" class="btn btn-primary"><i class="fa fa-eye"></i></button>
+        </div>
+        <div class="d-flex flex-row justify-content-end">
+          <button type="submit" class="btn btn-primary">
+            Submit
+            <i class="fa fa-circle-arrow-right ms-2"></i>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+@end

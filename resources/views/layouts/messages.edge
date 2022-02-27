@@ -1,0 +1,27 @@
+@if(flashMessages.has('errors'))
+  @if(flashMessages.get('errors').errors)
+    @each(error in flashMessages.get('errors').errors)
+      <div class="alert alert-sm alert-danger alert-dismissible fade show" role="alert">
+        <i class="fa fa-circle-xmark me-2"></i>
+        {{ error.message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    @endeach
+  @else
+    <div class="alert alert-sm alert-danger alert-dismissible fade show" role="alert">
+      <i class="fa fa-circle-xmark me-2"></i>
+      {{ flashMessages.get('errors') }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  @endif
+@endif
+
+@if(flashMessages.has('messages'))
+  @each(message in flashMessages.get('messages'))
+  <div class="alert alert-sm alert-{{ message.type || 'info' }} alert-dismissible fade show" role="alert">
+    <i class="fa fa-{{ message.type === 'info'? 'circle-info' : (message.type === 'warning' ? 'triangle-exclamation': (message.type === 'success' ? 'check': 'danger' )) }} me-2"></i>
+    {{ message.text }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+  @endeach
+@endif

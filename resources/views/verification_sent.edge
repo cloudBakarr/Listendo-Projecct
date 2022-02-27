@@ -1,0 +1,17 @@
+@layout('layouts/layout')
+
+@section('body')
+  <div class="container mt-4" style="max-width: 500px">
+    @include('layouts/messages')
+    <div class="mb-3">
+      <h1><i class="fa fa-check me-3"></i> Verification email sent!</h1>
+      <p>
+        To continue please check your email inbox and click on verify button.<br>
+        Your verification code will expire <b>until 10 minutes</b>.
+      </p>
+      <p>
+        <a href="{{ route('LoginController.resend') }}">Resend Email</a>
+      </p>
+    </div>
+  </div>
+@end

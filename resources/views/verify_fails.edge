@@ -1,0 +1,18 @@
+@layout('layouts/layout')
+
+@section('body')
+  <div class="container mt-4" style="max-width: 500px">
+
+    @include('layouts/messages')
+
+    <div class="mb-3">
+      <h1><i class="fa fa-times me-3"></i> Verification code is invalid!</h1>
+      <p>
+        Your validation code is invalid or expired please replay for validation again.
+      </p>
+      <p>
+        <a href="{{ route('LoginController.resend') }}">Resend Email</a>
+      </p>
+    </div>
+  </div>
+@end

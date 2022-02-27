@@ -1,0 +1,53 @@
+@layout('layouts/layout')
+
+@section('body')
+  <div class="container" style="max-width: 500px; padding-bottom: 100px">
+    <div class="mb-3">
+      @include('layouts/messages')
+      <h1>Register</h1>
+      <p>
+        Please enter your name, email and choose a password.
+      </p>
+    </div>
+    <form action="{{ route('LoginController.register') }}" method="post">
+      <div class="input-group mb-3">
+        <div class="input-group-text">First Name</div>
+        <input
+          value="{{ flashMessages.get('firstName', '') || '' }}"
+          type="text" name="firstName" id="firstName" class="form-control" autocomplete="firstName">
+      </div>
+      <div class="input-group mb-3">
+        <div class="input-group-text">Last Name</div>
+        <input
+          value="{{ flashMessages.get('lastName', '') || '' }}"
+          type="text" name="lastName" id="lastName" class="form-control" autocomplete="lastName">
+      </div>
+      <div class="input-group mb-3">
+        <div class="input-group-text">Email</div>
+        <input
+          value="{{ flashMessages.get('email', '') || '' }}"
+          type="email" name="email" id="email" class="form-control" autocomplete="email">
+      </div>
+      <div class="input-group mb-3">
+        <div class="input-group-text">Set a password</div>
+        <input type="password" name="password" id="password" class="form-control" autocomplete="current-password">
+        <button
+          showPass="password"
+          type="button" class="btn btn-primary"><i class="fa fa-eye"></i></button>
+      </div>
+      <div class="mb-3">
+        <a href="{{ route('LoginController.showLogin') }}">Already have an account?</a>
+      </div>
+      <div class="d-flex flex-row justify-content-between">
+        <button type="reset" class="btn btn-primary">
+          <i class="fa fa-times me-2"></i>
+          Reset
+        </button>
+        <button type="submit" class="btn btn-primary">
+          Submit
+          <i class="fa fa-circle-arrow-right ms-2"></i>
+        </button>
+      </div>
+    </form>
+  </div>
+@end
