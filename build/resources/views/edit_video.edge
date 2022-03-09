@@ -1,0 +1,39 @@
+@layout('layouts/layout')
+
+@section('body')
+  <div class="container" style="max-width: 500px; margin-bottom: 100px">
+
+    @include('layouts/messages')
+
+    <div class="mb-3">
+      <h1>Edit music</h1>
+      <p>
+        Edit the name and signer of the music <b>"{{ media.name }}"</b>.
+      </p>
+    </div>
+    <form action="{{ route('DashboardController.editMusic',[media.id]) }}" method="post">
+      <div class="input-group mb-3">
+        <div class="input-group-text">Name</div>
+        <input
+          value="{{ flashMessages.get('name', '') || media.name }}"  
+          type="text" name="name" id="name" class="form-control" autocomplete="name">
+      </div>
+      <div class="input-group mb-3">
+        <div class="input-group-text">Singer</div>
+        <input
+          value="{{ flashMessages.get('singer', '') || media.singer }}"  
+          type="text" name="singer" id="singer" class="form-control" autocomplete="singer">
+      </div>
+      <div class="d-flex flex-row justify-content-between">
+        <a href="{{ route('DashboardController.index') }}" type="button" class="btn btn-outline-secondary">
+          <i class="fa fa-times me-2"></i>
+          Cancel
+        </a>
+        <button type="submit" class="btn btn-primary">
+          Save
+          <i class="fa fa-circle-arrow-right ms-2"></i>
+        </button>
+      </div>
+    </form>
+  </div>
+@end

@@ -1,0 +1,107 @@
+@layout('layouts/layout')
+
+@section('body')
+  <div class="container">
+    <div style="max-width: 400px;margin: 0 auto">
+      @include('layouts/messages')
+    </div>
+    <div class="card text-center">
+      <div class="card-body">
+        <h5 class="card-title">Add new music</h5>
+        <p class="card-text">Upload and share audio and videos </p>
+        <form id="addMediaForm" action="{{ route('DashboardController.addMedia') }}" method="post" enctype="multipart/form-data">
+          <div style="margin: 0 auto;max-width: 400px">
+            <div class="input-group mb-3">
+              <div class="input-group-text">Name</div>
+              <input
+                value="{{ flashMessages.get('name', '') || '' }}"
+                type="text" name="name" id="name" class="form-control">
+            </div>
+            <div class="input-group mb-3">
+              <div class="input-group-text">Singer</div>
+              <input type="text" name="singer" id="singer" class="form-control">
+            </div>
+            <input type="file" name="media" id="addMediaFile" style="display: none" accept=".mp4,.wav,.mp3,.ogg,.ogv,.oga,.ogx,.ogm,.spx,.opus,.wave,.mp4,.m4a,.m4p,.m4b,.m4r,.m4v,.caf,.webm">
+            <label for="addMediaFile" id="addMediaFileLabel" class="btn btn-outline-primary d-block">Pick music file</label>
+            <hr class="mt-3">
+          </div>
+          <button id="addMediaButton" type="submit" class="btn btn-primary">ADD</button>
+        </form>
+      </div>
+    </div>
+    <h4 class="mt-4">Playlist</h4>
+    <hr>
+    <div class="row">
+      @each((m, i) in media)
+        <div class="col-md-6 col-lg-4 mb-3">
+          <div class="card">
+            <div class="card-body">
+              <div class="d-flex flex-row justify-content-between">
+                <h5>{{ m.name }}</h5>
+                <div class="btn-group">
+                  <button
+                    type="button"
+                    class="btn rounded-pill dropdown-toggle"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                    id="music_{{i}}"
+                  >
+                    <i class="fa fa-fw fa-ellipsis-vertical"></i>
+                  </button>
+                  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="music_{{i}}">
+                    <li>
+                      <a href="{{ route('DashboardController.showMusic',[m.id]) }}" class="dropdown-item" type="button">
+                        <i class="fa fa-edit fa-fw me-2"></i>
+                        Edit
+                      </a>
+                    </li>
+                    <li class="dropdown-divider"></li>
+                    <li><a href="{{ route('DashboardController.deleteMedia',[m.id]) }}" class="delete-a-music dropdown-item" type="button"><i class="fa fa-times fa-fw me-2"></i>Delete</a></li>
+                  </ul>
+                </div>
+              </div>
+              <p>
+                <small>From {{ m.singer }}</small>
+                <br>
+                <small>{{ (new Date(m.created_at)).toDateString() }}</small>
+              </p>
+              <video controls class="video-control">
+                <source src="{{ m.link }}">
+                Your browser does not support this video
+              </video>
+            </div>
+          </div>
+        </div>
+      @endeach
+
+      <hr class="mt-5 mb-5">
+
+      <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+          {{--  <li class="page-item">
+            <a
+              href="{{ route('DashboardController.index') }}"
+              class="page-link"
+              href="#"><i class="fa fa-angle-left me-2"></i> Previous</a>
+          </li>  --}}
+          @each(anchor in media.getUrlsForRange(1, media.lastPage))
+          <li class="page-item">
+            <a
+              href="{{ route('DashboardController.index') }}{{ anchor.url }}"
+              class="page-link"
+            >
+              {{ anchor.page }}
+            </a>
+          </li>
+          @endeach
+          {{--  <li class="page-item">
+            <a
+              href="{{ route('DashboardController.index') }}"
+              class="page-link"
+            >Next <i class="fa fa-angle-right ms-2"></i></a>
+          </li>  --}}
+        </ul>
+      </nav>
+    </div>
+  </div>
+@end

@@ -1,0 +1,21 @@
+@layout('layouts/layout')
+
+@section('body')
+  <div class="container mt-4" style="max-width: 500px">
+
+    @include('layouts/messages')
+
+    <div class="mb-3">
+      <h1><i class="fa fa-lock me-3"></i> Not Verrified</h1>
+      <p>
+        Please verrify your email before continue.
+      </p>
+      <p>
+        Check your email inbox.
+      </p>
+      <p>
+        <a href="{{ route('LoginController.resend') }}">Resend Email</a>
+      </p>
+    </div>
+  </div>
+@end

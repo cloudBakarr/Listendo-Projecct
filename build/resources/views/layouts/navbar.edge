@@ -1,0 +1,59 @@
+<nav class="navbar navbar-expand-lg">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <img src="/assets/images/logo.png" alt="logo" class="me-2">
+      {{ appName || 'NULL' }}
+    </a>
+    <button style="color: inherit" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <i class="fa fa-bars"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link {{ title === ''? 'active': '' }}" href="{{ route('LandingsController.index') }}">Home</a>
+        </li>
+        @if(auth.isLoggedIn)
+        <li class="nav-item">
+          <a class="nav-link {{ title === 'Dashboard'? 'active': '' }}" href="{{ route('DashboardController.index') }}">Dashboard</a>
+        </li>
+        @end
+      </ul>
+      <ul class="navbar-nav ms-auto pb-3 pb-lg-0">
+        @if(auth.isLoggedIn)
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            {{ auth.user.lastName }}
+            <div class="ms-2" id="profileImage" style="background-image: url('{{ auth.user.image }}')"></div>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
+            <li><a class="dropdown-item" href="{{ route('DashboardController.index') }}">
+              <i class="fa-fw fa fa-gauge me-1"></i>
+              Dashboard
+            </a></li>
+            <li><a class="dropdown-item" href="{{ route('DashboardController.showSettings') }}">
+              <i class="fa-fw fa fa-gear me-1"></i>
+              Settings
+            </a></li>
+            <li class="dropdown-divider"></li>
+            <li>
+              <form action="{{ route('LoginController.logout') }}" method="post">
+                <button class="dropdown-item" type="submit">
+                  <i class="fa-fw fa fa-power-off me-1"></i>
+                  Logout
+                </button>
+              </form>
+            </li>
+          </ul>
+        </li>
+        @else
+        <li class="nav-item">
+          <a class="nav-link" href="{{ route('LoginController.showLogin') }}">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ route('LoginController.showRegister') }}">Register</a>
+        </li>
+        @end
+      </ul>
+    </div>
+  </div>
+</nav>
