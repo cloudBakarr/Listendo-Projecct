@@ -1,4 +1,4 @@
 export default {
-  "appName": "Video Manager",
+  "appName": "Listendo",
   "description": "Upload and manage your videos!"
 }

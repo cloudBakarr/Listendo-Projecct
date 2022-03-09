@@ -4,8 +4,8 @@
   @include('layouts/header')
   <div class="container">
     <div class="text-center" style="padding: 100px 0">
-      <h1>Tell More About Your Project</h1>
-      <p class="mb-5">It's a tag line, where you can write a key point of your idea.</p>
+      <h1>Easy and simple way to keep track of your music</h1>
+      <p class="mb-5">Just upload your audio and video files and access it whenever you want!</p>
       <h3 class="mb-4">Create your best record!</h3>
       <p>
         Our Recording Studio is your one-stop spot for all of your professional recording needs. We offer an individual working environment that allows artists and bands to focus on their creative and artistic processes. Our recording and monitoring rooms are designed to achieve the most precise possible acoustic properties and sound. Studio features a considerable collection of cutting-edge and vintage equipment.
@@ -15,10 +15,10 @@
   <div class="bg-image bg-fixed" style="background-image: url('/assets/images/calltoaction.jpg')">
     <div class="container">
       <div class="text-center" style="padding: 100px 0;">
-        <h1 class="mb-4 text-dark">Tell your visitors about time limited offer with 50% OFF.
-          It will raise the conversion!</h1>
+        <h1 class="mb-4 text-dark">Upload 30 videos/Audios and you will have a chance to 
+        earn tickets to your favorite artists concert </h1>
           @if(!auth.user)
-          <a href="{{ route('LoginController.showRegister') }}" class="btn btn-lg btn-outline-dark">Get Started</a>
+          <a href="{{ route('LoginController.showRegister') }}" class="buttonz">Get Started</a>
           @endif
       </div>
     </div>
@@ -28,33 +28,7 @@
       <h1 class="mb-4">Your Main Features & Benefits!</h1>
       <p>We are sure that your product, service or event has plenty of advantages. Tell about them.</p>
       <div class="row mt-5">
-        <div class="col-lg-4 col-md-6 text-center">
-          <h1><i class="fa fa-music"></i></h1>
-          <h4>
-            Lorem ipsum dolor sit.
-          </h4>
-          <p>
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Error, perspiciatis sit autem reiciendis sint,
-          </p>
-        </div>
-        <div class="col-lg-4 col-md-6 text-center">
-          <h1><i class="fa fa-compact-disc"></i></h1>
-          <h4>
-            Lorem ipsum dolor sit.
-          </h4>
-          <p>
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Error, perspiciatis sit autem reiciendis sint,
-          </p>
-        </div>
-        <div class="col-lg-4 col-md-6 text-center">
-          <h1><i class="fa fa-headphones"></i></h1>
-          <h4>
-            Lorem ipsum dolor sit.
-          </h4>
-          <p>
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Error, perspiciatis sit autem reiciendis sint,
-          </p>
-        </div>
+
       </div>
     </div>
   </div>
@@ -164,9 +138,6 @@
           </p>
         </div>
         <div class="col-md-4 col-lg-3">
-          <p class="text-secondary">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia eveniet culpa est aliquid neque ipsum.
-          </p>
         </div>
       </div>
     </div>
